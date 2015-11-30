@@ -15,4 +15,6 @@ public:
   virtual object_str str ( ) const = 0;
 };
 
+void print ( const object* a );
+
 #endif

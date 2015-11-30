@@ -1,15 +1,15 @@
-#ifndef TYPE_HH_
-  #define TYPE_HH_
+#ifndef private_type_HH_
+  #define private_type_HH_
 
 #include <string>
 
 using std :: string;
 
-enum class TYPE{
-  type,
-  str,
+enum class private_type{
+  private_type_type,
+  private_type_str,
 };
 
-string str ( const enum TYPE type );
+string private_type_string ( const enum private_type type );
 
 #endif

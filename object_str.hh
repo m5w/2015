@@ -13,6 +13,8 @@ class object_str:public object{
 public:
   friend bool operator== ( const object_str& a,const object_str& b );
 
+  friend void print ( const object* a );
+
   object_str ( const string str ); 
 
   object_type type ( ) const;
