@@ -1,0 +1,7 @@
+/.ycm_extra_conf.pyc
+/CMakeCache.txt
+/CMakeFiles/
+/Makefile
+/cmake_install.cmake
+/*.a
+/object-type-test

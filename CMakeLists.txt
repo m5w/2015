@@ -1,0 +1,7 @@
+cmake_minimum_required (VERSION 2.6)
+project (2015-2016_s6r_1)
+include_directories ("${PROJECT_SOURCE_DIR}")
+add_executable (object-type-test object_type_test.cc)
+add_library (2015-2016_s6r_1 object.cc object_str.cc object_type.cc type.cc)
+target_link_libraries (object-type-test 2015-2016_s6r_1)
+set (CMAKE_CXX_FLAGS "-std=c++11")
