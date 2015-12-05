@@ -5,6 +5,7 @@
 
 #include <object_list.hh>
 
+using std :: lexicographical_compare;
 using std :: reverse;
 
 using std :: unique_ptr;
@@ -47,4 +48,9 @@ unique_ptr<object>object_list :: pop ( vector<unique_ptr<object> >:: iterator ::
 
 void object_list :: reverse ( ){
   :: reverse ( list_ . begin ( ),list_ . end ( ) );
+}
+
+bool object_list :: lt ( const object& b ) const{
+  auto b_list = dynamic_cast<const object_list&>( b );
+  return lexicographical_compare ( list_ . cbegin ( ),list_ . cend ( ),b_list . list_ . cbegin ( ),b_list . list_ . cend ( ) );
 }
