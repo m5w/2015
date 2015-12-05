@@ -1,4 +1,5 @@
 #include <object.hh>
 
-object :: ~object ( ){
+bool operator< ( const object& a,const object& b ){
+  return a . lt ( b );
 }
