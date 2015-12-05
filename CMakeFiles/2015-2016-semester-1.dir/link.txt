@@ -1,0 +1,2 @@
+/usr/bin/ar cr lib2015-2016-semester-1.a  CMakeFiles/2015-2016-semester-1.dir/object.o CMakeFiles/2015-2016-semester-1.dir/object_int.o
+/usr/bin/ranlib lib2015-2016-semester-1.a

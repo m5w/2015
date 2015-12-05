@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/matthew/github.com/m5w/2015-2016-semester-1/object_int_test.cc
+iostream
+-
+limits
+-
+object.hh
+-
+object_int.hh
+-
+
+object.hh
+
+object_int.hh
+object.hh
+-
+

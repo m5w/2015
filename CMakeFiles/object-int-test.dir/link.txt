@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++11    CMakeFiles/object-int-test.dir/object_int_test.o  -o object-int-test -rdynamic lib2015-2016-semester-1.a 

@@ -1,0 +1,12 @@
+*.pyc
+/CMakeCache.txt
+/CmakeFiles/
+/CTestTestfile.cmake
+/DartConfiguration.tcl
+/Makefile
+/Testing/
+/cmake_install.cmake
+/lib2015-2016-semester-1.a
+/max
+/min
+/object-int-test

@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/matthew/github.com/m5w/2015-2016-semester-1/max.cc
+iostream
+-
+limits
+-
+object_int.hh
+-
+
+object.hh
+
+object_int.hh
+object.hh
+-
+
