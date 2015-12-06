@@ -2,11 +2,14 @@
   #define OBJECT_LIST_HH_
 
 #include <memory>
+#include <ostream>
 #include <vector>
 
 #include <object.hh>
 
 using std :: unique_ptr;
+
+using std :: ostream;
 
 using std :: vector;
 
@@ -24,7 +27,9 @@ public:
 
   void reverse ( );
 private:
-  bool lt ( const object& b ) const;
+  ostream& print ( ostream& a ) const override;
+
+  bool lt ( const object& b ) const override;
 
   vector<unique_ptr<object> >list_;
 };

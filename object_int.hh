@@ -1,4 +1,8 @@
+#include <ostream>
+
 #include <object.hh>
+
+using std :: ostream;
 
 class object_int:public object{
 public:
@@ -6,5 +10,7 @@ public:
 
   const long long int_;
 private:
+  ostream& print ( ostream& a ) const override;
+
   bool lt ( const object& b ) const override;
 };
