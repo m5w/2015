@@ -1,12 +1,8 @@
+#include "object_int.hpp"
+
 #include <iostream>
 #include <limits>
 
-#include <object_int.hh>
-
-using std :: cout;
-
-using std :: numeric_limits;
-
-int main ( ){
-  cout << numeric_limits<decltype ( object_int :: int_ )>:: max ( ) << '\n';
+int main() {
+  std::cout << std::numeric_limits<decltype(object_int::int_)>::max() << '\n';
 }
