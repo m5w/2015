@@ -8,15 +8,62 @@
 #include <utility>
 #include <vector>
 
-std::shared_ptr<object> object_list::deepcopy() const {
-  std::shared_ptr<object_list> b(new object_list);
+std::pair<object_list, object_list> object_list::splice(const object_list &a) {
+  std::pair<object_list, object_list> Spliced;
+  auto Middle = a.list_.cbegin() + a.list_.size() / 2;
+  Spliced.first.list_ =
+      std::vector<std::shared_ptr<object>>(a.list_.cbegin(), Middle);
+  Spliced.second.list_ =
+      std::vector<std::shared_ptr<object>>(Middle, a.list_.cend());
+  return Spliced;
+}
 
-  for (const auto &item : list_) {
-    b->list_.push_back(std::move(item->deepcopy()));
+object_list object_list::merge(const object_list &a, const object_list &b) {
+  object_list Merged;
+
+  {
+    auto a_iterator = a.list_.cbegin();
+    auto b_iterator = b.list_.cbegin();
+
+    {
+      const auto a_end = a.list_.cend();
+      const auto b_end = b.list_.cend();
+
+      while (a_iterator != a_end && b_iterator != b_end) {
+        if (**a_iterator < **b_iterator) {
+          Merged.list_.push_back(*a_iterator);
+          ++a_iterator;
+        } else {
+          Merged.list_.push_back(*b_iterator);
+          ++b_iterator;
+        }
+      }
+
+      while (a_iterator != a_end) {
+        Merged.list_.push_back(*a_iterator);
+        ++a_iterator;
+      }
+
+      while (b_iterator != b_end) {
+        Merged.list_.push_back(*b_iterator);
+        ++b_iterator;
+      }
+    }
   }
 
-  return std::static_pointer_cast<object>(std::move(b));
+  return Merged;
 }
+
+object_list object_list::mergeSort(const object_list &a) {
+  if (a.len() <= 1) {
+    return a;
+  }
+
+  auto Spliced = splice(a);
+  return merge(mergeSort(Spliced.first), mergeSort(Spliced.second));
+}
+
+object_list object_list::sort(const object_list &a) { return mergeSort(a); }
 
 void object_list::extend(object_list L) {
   list_.reserve(list_.size() + L.list_.size());
@@ -41,6 +88,20 @@ std::shared_ptr<object> object_list::pop(
 }
 
 void object_list::reverse() { std::reverse(list_.begin(), list_.end()); }
+
+std::vector<std::shared_ptr<object>>::size_type object_list::len() const {
+  return list_.size();
+}
+
+std::shared_ptr<object> object_list::deepcopy() const {
+  std::shared_ptr<object_list> b(new object_list);
+
+  for (const auto &item : list_) {
+    b->list_.push_back(std::move(item->deepcopy()));
+  }
+
+  return std::static_pointer_cast<object>(std::move(b));
+}
 
 std::ostream &object_list::print(std::ostream &a) const {
   a << '[' << *(list_.front());
