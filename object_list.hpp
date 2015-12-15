@@ -10,14 +10,18 @@
 
 class object_list : public object {
 public:
-  std::vector<std::shared_ptr<object>>::size_type
-  binary_search(const std::vector<std::shared_ptr<object>>::size_type minimum,
-                decltype(minimum) maximum, const object &x);
+  std::vector<std::shared_ptr<object>>::const_iterator binary_search(
+      const std::vector<
+          std::shared_ptr<object>>::const_iterator::difference_type minimum,
+      decltype(minimum) maximum, const object &x) const;
+  std::vector<std::shared_ptr<object>>::const_iterator
+  linear_search(const object &x) const;
   static std::pair<object_list, object_list> splice(const object_list &a);
   static object_list merge(const object_list &a,const object_list &b);
   static object_list mergeSort(const object_list &a);
   void selection_sort();
-  std::vector<std::shared_ptr<object>>::size_type search(const object &x);
+  std::vector<std::shared_ptr<object>>::const_iterator
+  search(const object &x) const;
   static object_list sort(const object_list &a);
   template <typename object_type> void append(object_type x);
   void extend(object_list L);

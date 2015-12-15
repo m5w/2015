@@ -8,19 +8,36 @@
 #include <utility>
 #include <vector>
 
-std::vector<std::shared_ptr<object>>::size_type object_list::binary_search(
-    const std::vector<std::shared_ptr<object>>::size_type minimum,
-    decltype(minimum) maximum, const object &x) {
+decltype(object_list::list_)::const_iterator object_list::binary_search(
+    const std::vector<std::shared_ptr<object>>::const_iterator::difference_type
+        minimum,
+    decltype(minimum) maximum, const object &x) const {
   const auto average = (minimum + maximum) / 2;
 
-  const auto &average_object = *list_.at(average);
+  if (average == minimum)
+    return list_.cend();
 
-  if (average_object < x)
+  const auto &average_iterator = list_.cbegin() + average;
+
+  if (**average_iterator < x)
     return binary_search(average, maximum, x);
-  else if (average_object == x)
-    return average;
+  else if (**average_iterator == x)
+    return average_iterator;
   else
     return binary_search(minimum, average, x);
+}
+
+decltype(object_list::list_)::const_iterator
+object_list::linear_search(const object &x) const {
+  const auto list_end = list_.cend();
+
+  for (auto list_iterator = list_.cbegin(); list_iterator != list_end;
+       ++list_iterator) {
+    if (**list_iterator == x)
+      return list_iterator;
+  }
+
+  return list_end;
 }
 
 std::pair<object_list, object_list> object_list::splice(const object_list &a) {
@@ -94,9 +111,10 @@ void object_list::selection_sort() {
   }
 }
 
-std::vector<std::shared_ptr<object>>::size_type
-object_list::search(const object &x) {
-  return binary_search(0, list_.size() - 1, x);
+std::vector<std::shared_ptr<object>>::const_iterator
+object_list::search(const object &x) const {
+  return binary_search(list_.cbegin() - list_.cbegin(),
+                       list_.cend() - list_.cbegin(), x);
 }
 
 object_list object_list::sort(const object_list &a) { return mergeSort(a); }

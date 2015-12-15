@@ -42,6 +42,4 @@ int main() {
 
   N.reverse();
   std::cout << "N = " << N << '\n';
-
-  std::cout << "2 at L[" << L.search(object_int(2)) << "]\n";
 }
