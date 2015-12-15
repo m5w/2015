@@ -10,9 +10,13 @@
 
 class object_list : public object {
 public:
+  std::vector<std::shared_ptr<object>>::size_type
+  binary_search(const std::vector<std::shared_ptr<object>>::size_type minimum,
+                decltype(minimum) maximum, const object &x);
   static std::pair<object_list, object_list> splice(const object_list &a);
   static object_list merge(const object_list &a,const object_list &b);
   static object_list mergeSort(const object_list &a);
+  std::vector<std::shared_ptr<object>>::size_type search(const object &x);
   static object_list sort(const object_list &a);
   template <typename object_type> void append(object_type x);
   void extend(object_list L);
@@ -30,6 +34,7 @@ public:
 private:
   std::vector<std::shared_ptr<object>> list_;
   std::ostream &print(std::ostream &a) const override;
+  bool eq(const object &b) const override;
   bool lt(const object &b) const override;
 };
 

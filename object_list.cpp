@@ -8,6 +8,21 @@
 #include <utility>
 #include <vector>
 
+std::vector<std::shared_ptr<object>>::size_type object_list::binary_search(
+    const std::vector<std::shared_ptr<object>>::size_type minimum,
+    decltype(minimum) maximum, const object &x) {
+  const auto average = (minimum + maximum) / 2;
+
+  const auto &average_object = *list_.at(average);
+
+  if (average_object < x)
+    return binary_search(average, maximum, x);
+  else if (average_object == x)
+    return average;
+  else
+    return binary_search(minimum, average, x);
+}
+
 std::pair<object_list, object_list> object_list::splice(const object_list &a) {
   std::pair<object_list, object_list> Spliced;
   auto Middle = a.list_.cbegin() + a.list_.size() / 2;
@@ -63,6 +78,11 @@ object_list object_list::mergeSort(const object_list &a) {
   return merge(mergeSort(Spliced.first), mergeSort(Spliced.second));
 }
 
+std::vector<std::shared_ptr<object>>::size_type
+object_list::search(const object &x) {
+  return binary_search(0, list_.size() - 1, x);
+}
+
 object_list object_list::sort(const object_list &a) { return mergeSort(a); }
 
 void object_list::extend(object_list L) {
@@ -110,6 +130,10 @@ std::ostream &object_list::print(std::ostream &a) const {
       [&](const std::shared_ptr<object> &b) -> void { a << ", " << *b; });
   a << ']';
   return a;
+}
+
+bool object_list::eq(const object &b) const {
+  return list_ == dynamic_cast<const object_list &>(b).list_;
 }
 
 bool object_list::lt(const object &b) const {

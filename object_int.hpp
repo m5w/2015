@@ -14,6 +14,7 @@ public:
 
 private:
   std::ostream &print(std::ostream &a) const override;
+  bool eq(const object &b) const override;
   bool lt(const object &b) const override;
 };
 
