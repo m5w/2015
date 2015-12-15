@@ -9,7 +9,7 @@ add_executable(min min.cpp)
 add_executable(max max.cpp)
 target_link_libraries(object-int-test 2015-2016-semester-1)
 target_link_libraries(object-list-test 2015-2016-semester-1)
-set(CMAKE_CXX_FLAGS "-std=c++11")
+set(CMAKE_CXX_FLAGS "-g -std=c++11")
 
 include(CTest)
 

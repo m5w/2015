@@ -78,6 +78,22 @@ object_list object_list::mergeSort(const object_list &a) {
   return merge(mergeSort(Spliced.first), mergeSort(Spliced.second));
 }
 
+void object_list::selection_sort() {
+  const auto list_end = list_.cend();
+  for (auto suffix_begin = list_.begin(); suffix_begin != list_end;
+       ++suffix_begin) {
+    auto selected = suffix_begin;
+
+    for (auto suffix_iterator = suffix_begin + 1; suffix_iterator != list_end;
+         ++suffix_iterator) {
+      if (**suffix_iterator < **selected)
+        selected = suffix_iterator;
+    }
+
+    std::swap(*suffix_begin, *selected);
+  }
+}
+
 std::vector<std::shared_ptr<object>>::size_type
 object_list::search(const object &x) {
   return binary_search(0, list_.size() - 1, x);
@@ -137,7 +153,5 @@ bool object_list::eq(const object &b) const {
 }
 
 bool object_list::lt(const object &b) const {
-  auto b_list = dynamic_cast<const object_list &>(b);
-  return std::lexicographical_compare(
-      list_.cbegin(), list_.cend(), b_list.list_.cbegin(), b_list.list_.cend());
+  return list_ < dynamic_cast<const object_list &>(b).list_;
 }

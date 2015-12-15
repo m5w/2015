@@ -37,6 +37,11 @@ int main() {
   auto N = object_list::sort(L);
   std::cout << "N = " << N << '\n';
 
+  L.selection_sort();
+  std::cout << "L = " << L << '\n';
+
   N.reverse();
   std::cout << "N = " << N << '\n';
+
+  std::cout << "2 at L[" << L.search(object_int(2)) << "]\n";
 }

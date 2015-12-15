@@ -16,6 +16,7 @@ public:
   static std::pair<object_list, object_list> splice(const object_list &a);
   static object_list merge(const object_list &a,const object_list &b);
   static object_list mergeSort(const object_list &a);
+  void selection_sort();
   std::vector<std::shared_ptr<object>>::size_type search(const object &x);
   static object_list sort(const object_list &a);
   template <typename object_type> void append(object_type x);
