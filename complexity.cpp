@@ -69,7 +69,7 @@ int main() {
     std::cout << Size;
 
     for (const auto &Duration : Durations) {
-      std::cout << ' ' << Duration;
+      std::cout << '\t' << Duration;
     }
 
     std::cout << '\n';
@@ -102,7 +102,7 @@ timeMergeSort(std::size_t Size,
               std::uniform_int_distribution<IntType> &UniformIntDistribution_,
               std::default_random_engine DefaultRandomEngine_) {
   auto L = getRandomList(Size, UniformIntDistribution_, DefaultRandomEngine_);
-  return timeAlgorithm([&]() -> void { object_list::mergeSort(L); });
+  return timeAlgorithm([&]() -> void { auto M = object_list::sort(L); });
 }
 
 template <typename IntType>
@@ -122,7 +122,10 @@ long timeBinarySearch(
   auto L = object_list::mergeSort(
       getRandomList(Size, UniformIntDistribution_, DefaultRandomEngine_));
   auto x = object_int(UniformIntDistribution_(DefaultRandomEngine_));
-  return timeAlgorithm([&]() -> void { L.search(x); });
+  return timeAlgorithm([&]() -> void {
+    auto M = object_list::sort(L);
+    M.search(x);
+  });
 }
 
 template <typename IntType>

@@ -14,17 +14,21 @@ decltype(object_list::list_)::const_iterator object_list::binary_search(
     decltype(minimum) maximum, const object &x) const {
   const auto average = (minimum + maximum) / 2;
 
-  if (average == minimum)
-    return list_.cend();
-
   const auto &average_iterator = list_.cbegin() + average;
 
-  if (**average_iterator < x)
+  if (**average_iterator < x) {
+    if (average == minimum)
+      return list_.cend();
+
     return binary_search(average, maximum, x);
-  else if (**average_iterator == x)
+  } else if (**average_iterator == x)
     return average_iterator;
-  else
+  else {
+    if (average == maximum)
+      return list_.cend();
+
     return binary_search(minimum, average, x);
+  }
 }
 
 decltype(object_list::list_)::const_iterator
